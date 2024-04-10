@@ -1,35 +1,112 @@
-const { resolve } = require("node:path");
-
-const project = resolve(process.cwd(), "tsconfig.json");
-
-/** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: [
-    "eslint:recommended",
-    "prettier",
-    require.resolve("@vercel/style-guide/eslint/next"),
-    "eslint-config-turbo",
-  ],
-  globals: {
-    React: true,
-    JSX: true,
-  },
   env: {
     node: true,
     browser: true,
+    es2021: true,
   },
-  plugins: ["only-warn"],
+  extends: [
+    'airbnb',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'prettier',
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
   settings: {
-    "import/resolver": {
-      typescript: {
-        project,
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', '@types'],
       },
+      typescript: {}, // this loads <rootdir>/tsconfig.json to eslint
     },
   },
+  plugins: ['react', '@typescript-eslint'],
+  rules: {
+    'import/order': 'off',
+    indent: ['error', 2],
+    'no-trailing-spaces': 'error',
+    curly: 'error',
+    'max-len': ['warn', { code: 100 }],
+    'brace-style': 'error',
+    'no-multi-spaces': 'error',
+    'space-infix-ops': 'error',
+    'space-unary-ops': 'error',
+    'no-whitespace-before-property': 'error',
+    'func-call-spacing': 'error',
+    'space-before-blocks': 'error',
+    'keyword-spacing': ['error', { before: true, after: true }],
+    'comma-spacing': ['error', { before: false, after: true }],
+    'comma-style': ['error', 'last'],
+    'comma-dangle': ['error', 'always-multiline'],
+    'space-in-parens': ['error', 'never'],
+    'block-spacing': 'error',
+    'array-bracket-spacing': ['error', 'never'],
+    'object-curly-spacing': ['error', 'always'],
+    'key-spacing': ['error', { mode: 'strict' }],
+    'arrow-spacing': ['error', { before: true, after: true }],
+    'react/jsx-props-no-spreading': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: [
+          '**/*.test.js',
+          '**/*.test.jsx',
+          '**/*.test.ts',
+          '**/*.test.tsx',
+          '**/app/(root)/layout.tsx',
+        ],
+      },
+    ],
+    'no-console': 'off',
+    'no-alert': 'off',
+    'react/button-has-type': 'off',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+        '': 'never',
+      },
+    ],
+    'react/jsx-filename-extension': [
+      2,
+      {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    ],
+    'import/prefer-default-export': 'off',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'warn',
+    '@typescript-eslint/ban-types': 'off',
+    'no-underscore-dangle': 'off',
+    indent: 'off',
+    'react/require-default-props': 'off',
+    'react/jsx-no-bind': 'off',
+    'react/jsx-no-useless-fragment': 'off',
+    'no-plusplus': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        labelAttributes: ['htmlFor'],
+      },
+    ],
+  },
   ignorePatterns: [
-    // Ignore dotfiles
-    ".*.js",
-    "node_modules/",
+    '.eslintrc.js',
+    '/src/markup/**',
+    '**.test.ts',
+    '**.test.tsx',
+    './next.config.js',
   ],
-  overrides: [{ files: ["*.js?(x)", "*.ts?(x)"] }],
 };
