@@ -34,7 +34,7 @@ module.exports = {
     indent: ['error', 2],
     'no-trailing-spaces': 'error',
     curly: 'error',
-    'max-len': ['warn', { code: 100 }],
+    'max-len': ['warn', { code: 180 }],
     'brace-style': 'error',
     'no-multi-spaces': 'error',
     'space-infix-ops': 'error',
