@@ -152,6 +152,7 @@ export default function ScheduleHome() {
                   dates,
                   totalParticipants,
                   difference,
+                  sharedParticipants,
                   participants1,
                   participants2,
                 } = dateCombination;
@@ -163,7 +164,9 @@ export default function ScheduleHome() {
                   <div key={id} className={`${cardClass}`}>
                     <div className="mb-1">
                       <span className="font-bold highlight">선택된 날짜:</span>{' '}
-                      {dates[0]} & {dates[1]}
+                      {Array.isArray(dates)
+                        ? `${dates[0]} & ${dates[1]}`
+                        : dates}
                     </div>
                     <div className="mb-1">
                       <span className="font-bold">총 참여인원:</span>{' '}
@@ -175,21 +178,40 @@ export default function ScheduleHome() {
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <div className="font-bold">{dates[0]} 참여자:</div>
+                        <div className="font-bold">
+                          {Array.isArray(dates) ? dates[0] : dates} 참여자:
+                        </div>
                         <ul className="list-disc pl-5">
-                          {Array.from(participants1).map((participant) => (
-                            <li key={participant}>{participant}</li>
-                          ))}
+                          {Array.from(participants1).map((participant) =>
+                            sharedParticipants?.has(participant) ? (
+                              <li className="text-pGreen-500" key={participant}>
+                                {participant}
+                              </li>
+                            ) : (
+                              <li key={participant}>{participant}</li>
+                            ),
+                          )}
                         </ul>
                       </div>
-                      <div>
-                        <div className="font-bold">{dates[1]} 참여자:</div>
-                        <ul className="list-disc pl-5">
-                          {Array.from(participants2).map((participant) => (
-                            <li key={participant}>{participant}</li>
-                          ))}
-                        </ul>
-                      </div>
+                      {participants2 && (
+                        <div>
+                          <div className="font-bold">{dates[1]} 참여자:</div>
+                          <ul className="list-disc pl-5">
+                            {Array.from(participants2).map((participant) =>
+                              sharedParticipants?.has(participant) ? (
+                                <li
+                                  className="text-pGreen-500"
+                                  key={participant}
+                                >
+                                  {participant}
+                                </li>
+                              ) : (
+                                <li key={participant}>{participant}</li>
+                              ),
+                            )}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );

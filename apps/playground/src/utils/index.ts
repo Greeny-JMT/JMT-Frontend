@@ -35,6 +35,19 @@ function getDateCombinations(votedDateInfos: VotedDateInfos) {
   const dates = Object.keys(votedDateInfos);
   const dateCombinations: DateCombination[] = [];
   for (let i = 0; i < dates.length - 1; i++) {
+    // 단일 모임 추가
+    const dateParticipants = new Set([...Array.from(votedDateInfos[dates[i]])]);
+
+    dateCombinations.push({
+      id: crypto.randomUUID(),
+      dates: dates[i],
+      totalParticipants: dateParticipants.size, // 총 참여자 수 업데이트
+      difference: 0,
+      participants1: dateParticipants,
+      participants2: null,
+    });
+
+    // 다른 날짜와 조합
     for (let j = i + 1; j < dates.length; j++) {
       const date1Participants = new Set([
         ...Array.from(votedDateInfos[dates[i]]),
@@ -78,6 +91,7 @@ function getDateCombinations(votedDateInfos: VotedDateInfos) {
         dates: [dates[i], dates[j]],
         totalParticipants: date1Only.size + date2Only.size, // 총 참여자 수 업데이트
         difference: Math.abs(date1Only.size - date2Only.size),
+        sharedParticipants: new Set(sharedParticipants),
         participants1: date1Only,
         participants2: date2Only,
       });

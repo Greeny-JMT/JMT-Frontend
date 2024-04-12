@@ -12,9 +12,10 @@ export interface VotedDateInfos {
 
 export interface DateCombination {
   id: string;
-  dates: [string, string];
+  dates: [string, string] | string;
   totalParticipants: number;
   difference: number;
+  sharedParticipants?: Set<string>;
   participants1: Set<string>;
-  participants2: Set<string>;
+  participants2: Set<string> | null;
 }
