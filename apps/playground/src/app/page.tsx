@@ -7,7 +7,7 @@ import Lottie from 'react-lottie-player';
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#e2d2d2] px-12">
+    <div className="flex items-center justify-center min-h-screen bg-[#e2d2d2] px-12 py-12">
       <div className="flex flex-wrap w-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
         <div className="w-full md:w-3/5 p-8 bg-primaryColor-500 rounded-t-lg md:rounded-tr-none md:rounded-l-lg flex flex-col items-center justify-center">
           <h2 className="text-3xl font-bold text-center text-white">
