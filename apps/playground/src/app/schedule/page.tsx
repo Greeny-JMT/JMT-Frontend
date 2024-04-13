@@ -92,7 +92,7 @@ export default function ScheduleHome() {
             className={`px-4 py-2 rounded text-white ${
               selectedDate === '' || selectedPersons.length <= 0
                 ? 'bg-gray-500 opacity-50 cursor-not-allowed'
-                : 'bg-pGreen-500'
+                : 'bg-primaryColor-500'
             }`}
             disabled={selectedDate === '' || selectedPersons.length <= 0}
           >
@@ -127,7 +127,7 @@ export default function ScheduleHome() {
             <div className="mr-4">
               <button
                 onClick={() => handleFindBestDates()}
-                className="bg-pGreen-500 text-white px-4 py-2 rounded mb-4 font-bold"
+                className="bg-primaryColor-500 text-white px-4 py-2 rounded mb-4 font-bold"
               >
                 언제 만날까?
               </button>
@@ -135,7 +135,7 @@ export default function ScheduleHome() {
             <div>
               <button
                 onClick={handleReset}
-                className="bg-pGreen-500 text-white px-4 py-2 rounded mb-4 font-bold"
+                className="bg-primaryColor-500 text-white px-4 py-2 rounded mb-4 font-bold"
               >
                 초기화
               </button>
@@ -184,7 +184,7 @@ export default function ScheduleHome() {
                         <ul className="list-disc pl-5">
                           {Array.from(participants1).map((participant) =>
                             sharedParticipants?.has(participant) ? (
-                              <li className="text-pGreen-500" key={participant}>
+                              <li className="text-primaryColor-500" key={participant}>
                                 {participant}
                               </li>
                             ) : (
@@ -200,7 +200,7 @@ export default function ScheduleHome() {
                             {Array.from(participants2).map((participant) =>
                               sharedParticipants?.has(participant) ? (
                                 <li
-                                  className="text-pGreen-500"
+                                  className="text-primaryColor-500"
                                   key={participant}
                                 >
                                   {participant}
